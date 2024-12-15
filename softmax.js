@@ -3,40 +3,43 @@ function calculateSoftmax() {
     const inputs = Array.from(document.querySelectorAll('.x-input'))
         .map(input => parseFloat(input.value));
     
+    const base = parseFloat(document.getElementById('base').value);
+    
     // 计算exp值
-    const expValues = inputs.map(x => Math.exp(x));
-    const expSum = expValues.reduce((a, b) => a + b, 0);
+    const expValues = inputs.map(x => Math.pow(base, x));
+    const expSum = arraySum(expValues);
     
     // 计算softmax值
     const softmaxValues = expValues.map(exp => exp / expSum);
     
     // 更新exp显示
     document.querySelectorAll('.exp-item').forEach((item, index) => {
-        setupContentAndTooltip(
-            item,
-            `exp(X${index + 1}) = ${expValues[index].toFixed(2)}`,
-            `exp(${inputs[index].toFixed(2)}) = ${expValues[index].toFixed(2)}`
-        );
+        item.textContent = `exp(X${index + 1}) = ${expValues[index].toFixed(2)}`;
+        item.setAttribute('data-tooltip', `exp(${inputs[index].toFixed(2)}) = ${expValues[index].toFixed(2)}`);
     });
     
     // 更新softmax显示
     document.querySelectorAll('.soft-item').forEach((item, index) => {
-        setupContentAndTooltip(
-            item,
-            `softmax(X${index + 1}) = ${softmaxValues[index].toFixed(2)}`,
-            `exp(X${index + 1}) / ${expSum.toFixed(2)} = ${softmaxValues[index].toFixed(2)}`
-        );
+        item.textContent = `softmax(X${index + 1}) = ${softmaxValues[index].toFixed(2)}`;
+        item.setAttribute('data-tooltip', `exp(X${index + 1}) / ${expSum.toFixed(2)} = ${softmaxValues[index].toFixed(2)}`);
+
+        const value = parseFloat(item.textContent.split('=')[1]);
+        item.style.background = `linear-gradient(to right, rgba(144, 202, 249, 0.2) ${value * 100}%, transparent ${value * 100}%)`;
     });
+
+    // 更新expSum显示
+    document.getElementById('expSum').textContent = `expSum = ${expSum.toFixed(2)}`;
+    const expSumStr = expValues.map((e, index) => `${e.toFixed(2)}`).join(' + ');
+    document.getElementById('expSum').setAttribute('data-tooltip', `expSum = ${expSumStr}`);
+
+    // 更新softSum显示
+    document.getElementById('softSum').textContent = `softSum = ${arraySum(softmaxValues).toFixed(2)}`;
+    const softSumStr = softmaxValues.map((s, index) => `${s.toFixed(2)}`).join(' + ');
+    document.getElementById('softSum').setAttribute('data-tooltip', `softSum = ${softSumStr}`);
 }
 
-function setupContentAndTooltip(element, content, tooltip) {
-    element.textContent = content;
-    element.setAttribute('data-tooltip', tooltip);
-    
-    if (element.classList.contains('soft-item')) {
-        const value = parseFloat(content.split('=')[1]);
-        element.style.background = `linear-gradient(to right, rgba(144, 202, 249, 0.2) ${value * 100}%, transparent ${value * 100}%)`;
-    }
+function arraySum(array) {
+    return array.reduce((a, b) => a + b, 0);
 }
 
 function setupHighlight() {
