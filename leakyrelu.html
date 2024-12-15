@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>LeakyReLU可视化</title>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        .if-item {
+            text-align: center;
+        }
+        .highlight {
+            background-color: #ffeb3b;
+        }
+        .result-item {
+            padding: 2px;
+            margin: 5px 0;
+            position: relative;
+        }
+        .result-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background-color: rgba(144, 202, 249, 0.4);
+            z-index: -1;
+            transition: width 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>LeakyReLU 可视化</h1>
+    <div class="container">
+        <div class="slope-input" data-tooltip="负数部分的斜率，通常设置为0.01">
+            <label for="slope">负斜率α</label>
+            <input type="number" id="slope" value="0.01" step="0.01" min="0" max="1" oninput="calculateLeakyReLU()">
+        </div>
+        <div id="result-container">
+            <!-- 输入数组 -->
+            <div class="array">
+                <div class="input-row">X₁ = <input type="number" class="x-input" value="1.0" step="0.1" oninput="calculateLeakyReLU()"></div>
+                <div class="input-row">X₂ = <input type="number" class="x-input" value="-2.0" step="0.1" oninput="calculateLeakyReLU()"></div>
+                <div class="input-row">X₃ = <input type="number" class="x-input" value="3.0" step="0.1" oninput="calculateLeakyReLU()"></div>
+                <div class="input-row">X₄ = <input type="number" class="x-input" value="-1.5" step="0.1" oninput="calculateLeakyReLU()"></div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <div class="array">
+                <div class="if-item">1</div>
+                <div class="if-item">0.1</div>
+                <div class="if-item">1</div>
+                <div class="if-item">0.1</div>
+            </div>
+
+            <div class="arrow">→</div>
+
+            <!-- LeakyReLU结果 -->
+            <div class="array">
+                <div id="result-items">
+                    <div class="result-item">LeakyReLU(X₁) = 1.00</div>
+                    <div class="result-item">LeakyReLU(X₂) = -0.02</div>
+                    <div class="result-item">LeakyReLU(X₃) = 3.00</div>
+                    <div class="result-item">LeakyReLU(X₄) = -0.015</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="common.js"></script>
+    <script src="leakyrelu.js"></script>
+</body>
+</html> 

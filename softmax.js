@@ -48,7 +48,7 @@ function setupHighlight() {
     document.querySelectorAll('.exp-item').forEach((element, index) => {
         addEventListenersClickAndMouseover(element, () => {
             clearAllHighlights();
-            highlightByIndex('.input-row', index);
+            highlight('.input-row', index);
         });
     });
 
@@ -56,44 +56,19 @@ function setupHighlight() {
     document.querySelectorAll('.soft-item').forEach((element, index) => {
         addEventListenersClickAndMouseover(element, () => {
             clearAllHighlights();
-            highlightByIndex('.exp-item', index);
+            highlight('.exp-item', index);
         });
     });
 
     addEventListenersClickAndMouseover(document.getElementById('expSum'), () => {
         clearAllHighlights();
-        highlightByClass('.exp-item');
+        highlight('.exp-item');
     });
 
     addEventListenersClickAndMouseover(document.getElementById('softSum'), () => {
         clearAllHighlights();
-        highlightByClass('.soft-item');
+        highlight('.soft-item');
     });
-}
-
-function highlightByClass(className) {
-    document.querySelectorAll(className).forEach(element => {
-        element.classList.add('highlight-all');
-    });
-}
-
-function highlightByID(id) {
-    document.getElementById(id).classList.add('highlight-all');
-}
-
-function highlightByIndex(className, index) {
-    document.querySelectorAll(className)[index].classList.add('highlight-all');
-}
-
-function clearAllHighlights() {
-    document.querySelectorAll('.input-row, .exp-item, .soft-item').forEach(element => {
-        element.classList.remove('highlight', 'highlight-all');
-    });
-}
-
-function addEventListenersClickAndMouseover(element, callback) {
-    element.addEventListener('click', callback);
-    element.addEventListener('mouseover', callback);
 }
 
 // 页面加载时初始化
