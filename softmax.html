@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Softmax可视化</title>
     <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="tooltip.css">
     <style>
         .exp-items, .soft-items {
             display: flex;
@@ -40,19 +41,16 @@
 
         .soft-item {
             position: relative;
-            overflow: hidden;
         }
 
-        .soft-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            height: 100%;
-            background-color: rgba(144, 202, 249, 0.4);
-            z-index: -1;
+        .progress-bar {
+            height: 10px;
+            background-color: rgba(144, 202, 249, 0.8);
+            margin-top: 5px;
+            border-radius: 5px;
             transition: width 0.3s ease;
         }
+
     </style>
 </head>
 <body>
@@ -81,13 +79,13 @@
             <!-- exp(x) -->
             <div class="array">
                 <div class="exp-items">
-                    <div class="exp-item">exp(X₁) = 2.72</div>
-                    <div class="exp-item">exp(X₂) = 7.39</div>
-                    <div class="exp-item">exp(X₃) = 20.09</div>
-                    <div class="exp-item">exp(X₄) = 0.23</div>
+                    <div class="exp-item" data-tooltip="exp(X₁) = 2.72">exp(X₁) = 2.72</div>
+                    <div class="exp-item" data-tooltip="exp(X₂) = 7.39">exp(X₂) = 7.39</div>
+                    <div class="exp-item" data-tooltip="exp(X₃) = 20.09">exp(X₃) = 20.09</div>
+                    <div class="exp-item" data-tooltip="exp(X₄) = 0.23">exp(X₄) = 0.23</div>
                 </div>
                 
-                <div class="sum" id="expSum">总和 = 30.20</div>
+                <div class="sum exp-sum" id="expSum" data-tooltip="总和 = 30.20">总和 = 30.20</div>
             </div>
 
             <div class="arrows">
@@ -100,17 +98,18 @@
             <!-- 最终结果 -->
             <div class="array">
                 <div class="soft-items">
-                    <div class="soft-item">softmax(X₁) = 0.09</div>
-                    <div class="soft-item">softmax(X₂) = 0.24</div>
-                    <div class="soft-item">softmax(X₃) = 0.67</div>
-                    <div class="soft-item">softmax(X₄) = 0.00</div>
+                    <div class="soft-item" data-tooltip="softmax(X₁) = 0.09">softmax(X₁) = 0.09</div>
+                    <div class="soft-item" data-tooltip="softmax(X₂) = 0.24">softmax(X₂) = 0.24</div>
+                    <div class="soft-item" data-tooltip="softmax(X₃) = 0.67">softmax(X₃) = 0.67</div>
+                    <div class="soft-item" data-tooltip="softmax(X₄) = 0.00">softmax(X₄) = 0.00</div>
                 </div>
-                <div class="sum" id="softSum">总和 = 1.00</div>
+                <div class="sum soft-sum" id="softSum" data-tooltip="总和 = 1.00">总和 = 1.00</div>
             </div>
         </div>
     </div>
 
     <script src="common.js"></script>
+    <script src="tooltip.js"></script>
     <script src="softmax.js"></script>
 </body>
 </html>
