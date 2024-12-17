@@ -1,10 +1,10 @@
-<!DOCTYPE html>
+
 <html>
 <head>
     <meta charset="UTF-8">
     <title>Softmax可视化</title>
-    <link href="common.css?v=2b3b940f006e19f263757edcf887e5a8">
-    <link href="tooltip.css?v=d87b486393c59a11e8e44e36c57b574a">
+    <link rel="stylesheet" href="common.css?v=2b3b940f006e19f263757edcf887e5a8">
+    <link rel="stylesheet" href="tooltip.css?v=d87b486393c59a11e8e44e36c57b574a">
     <style>
         .exp-items, .soft-items {
             display: flex;
@@ -61,7 +61,7 @@
             <input type="number" id="base" value="2.718" step="0.1" oninput="calculateSoftmax()">
         </div>
         <div id="result-container">
-            <!-- 原始数组（带输入框） -->
+            
             <div class="array">
                 <div class="input-row">X₁ = <input type="number" class="x-input" value="1.0" step="0.1" oninput="calculateSoftmax()"></div>
                 <div class="input-row">X₂ = <input type="number" class="x-input" value="2.0" step="0.1" oninput="calculateSoftmax()"></div>
@@ -76,7 +76,7 @@
                 <div class="arrow-line">→</div>
             </div>
 
-            <!-- exp(x) -->
+            
             <div class="array">
                 <div class="exp-items">
                     <div class="exp-item" data-tooltip="exp(X₁) = 2.72">exp(X₁) = 2.72</div>
@@ -95,7 +95,7 @@
                 <div class="arrow-line">→</div>
             </div>
 
-            <!-- 最终结果 -->
+            
             <div class="array">
                 <div class="soft-items">
                     <div class="soft-item" data-tooltip="softmax(X₁) = 0.09">softmax(X₁) = 0.09</div>
